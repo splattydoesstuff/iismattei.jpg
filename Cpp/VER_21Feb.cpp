@@ -37,6 +37,7 @@ int main() {
     //Variabili
     int choice=0;
     int counter=-1;
+    int counter2=-1;
     int n=0;
     int max=0;
     int min=100000;
@@ -152,26 +153,53 @@ int main() {
     media=somma/n;
     cout<<"La somma totale dei tuoi guadagni in questo periodo è di "<<somma<<"€, mentre la media giornaliera è di "<<media<<"€."<<endl;
 
-    //Riempio array minore della media
-    for (int i=0; i<n; i++) {
-        if (incassi[i]<media) {
-            counter++;
-            small[counter]=incassi[i];
-        }
-    }
-
-    counter=-1;
-
-    //Riempio array maggiore della media
-    for (int i=0; i<n; i++) {
-        if (incassi[i]>=media) {
-            counter++;
-            big[counter]=incassi[i];
-        }
-    }
-
     //Output max, min e magro
     cout<<"Il guadagno massimo che hai avuto è stato di "<<max<<"€, quello minimo è stato di "<<min<<"€, ed hai avuto "<<magro<<" giornate magre (guadagno inferiore a 50€)."<<endl;
+
+    //for+if
+    cout<<endl<<endl<<"--- OUTPUT ARRAY METODO 1 ---"<<endl;
+    cout<<"Maggiori della media: ";
+        //Riempio array minore della media
+        for (int i=0; i<n; i++) {
+            if (incassi[i]<media) {
+                counter++;
+                small[counter]=incassi[i];
+                cout<<small[counter]<<"€ ";
+            }
+        }
+
+        counter=-1;
+        cout<<endl<<"Minori della media: ";
+        //Riempio array maggiore della media
+        for (int i=0; i<n; i++) {
+            if (incassi[i]>=media) {
+                counter++;
+                 big[counter]=incassi[i];
+                cout<<big[counter]<<"€ ";
+            }
+        }
+
+    //do-while
+    cout<<endl<<endl<<"--- OUTPUT ARRAY METODO 2 ---"<<endl;
+    cout<<"Maggiori della media: ";
+        //Riempio array minore della media
+        counter2++;
+            do {
+                counter++;
+                small[counter]=incassi[counter2];
+                cout<<small[counter]<<"€ ";
+                counter2++;
+            } while (incassi[counter2]<media);
+
+        counter=-1;
+        cout<<endl<<"Minori della media: ";
+        //Riempio array maggiore della media
+            do {
+                counter++;
+                big[counter]=incassi[counter2];
+                cout<<big[counter]<<"€ ";
+                counter2++;
+            } while (incassi[counter2]>media);
     
     return 0;
 }
